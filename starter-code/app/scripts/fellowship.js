@@ -34,8 +34,7 @@ function makeMiddleEarth() {
   // append middle-earth to your document body
   body.appendChild(middleEarth);
   //set id of middle-earth
-  middleEarth.setAttribute('id', 'middle-earth');
-
+  middleEarth.id = "middle-earth";
 
   // add each land as an article tag
   lands.forEach(function (land){
@@ -53,36 +52,54 @@ makeMiddleEarth();
 // Part 2
 
 function makeHobbits() {
-  //targetting var for 'The Shire'
-  let shireList = document.getElementsByTagName('article')[1].appendChild(document.createElement('ul'));
-
-
-  //appending list of hobbits onto spire
-  // hobbits.forEach(
-
-  // )
-  // shire.innerHTML = ""
+  //targetting var for shire
+  let shire = document.getElementsByTagName('article')[0];
+  //creating unordered list and appending to shire
+  let list = document.createElement('ul');
+  list.id = 'shireList';
+  shire.appendChild(list);
 
   // display an unordered list of hobbits in the shire (which is the second article tag on the page)
   // give each hobbit a class of hobbit
- 
+    hobbits.forEach(function(hobbitName){
+      let createHobbit = document.createElement('li');
+      if(hobbitName == 'Frodo Baggins'){
+        createHobbit.id = 'frodo';
+      }
+      createHobbit.class = 'hobbit';
+      createHobbit.innerHTML=hobbitName;
+      document.getElementById('shireList').appendChild(createHobbit);
+  })
 }
 
+makeHobbits();
 
 // Part 3
 
 function keepItSecretKeepItSafe() {
   // create a div with an id of 'the-ring'
+  let ring = document.createElement('div');
+  ring.id = 'the-ring';
   // give the div a class of 'magic-imbued-jewelry'
-  // add an event listener so that when a user clicks on the ring, the nazgulScreech function (provided) is invoked
+  ring.class = 'magic-imbued-jewelry';
   // add the ring as a child of Frodo
+  document.getElementById('frodo').appendChild(ring);
+  //  add an event listener so that when a user clicks on the ring, the nazgulScreech function (provided) is invoked
+  // NOTE:magic-imbued-jewelry css class may not have displayed correctly hence ring is unclickable. To test if the eventListener got added correctly, ring.innerHTML="testestest"
+  document.getElementById("the-ring").addEventListener("click", function(){
+    nazgulScreech();
+  });
 }
-
+keepItSecretKeepItSafe();
 
 // Part 4
 
 
 function makeBuddies() {
+  let rivSec = document.createElement('aside');
+
+
+
   // create an aside tag
   // attach an unordered list of the 'buddies' in the aside
   // insert your aside as a child element of rivendell
