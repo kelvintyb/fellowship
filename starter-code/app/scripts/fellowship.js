@@ -109,8 +109,11 @@ function makeBuddies() {
   // attach an unordered list of the 'buddies' in the aside
   buddies.forEach(function(buddy) {
     let createBuddy = document.createElement('li');
+    //attach id to buddies that are needed for later funcs
     if (buddy == 'Strider') {
       buddy.id = 'aragorn';
+    } else if (buddy == 'Boromir'){
+      buddy.id = 'boromir'
     }
     createBuddy.innerHTML = buddy;
     document.getElementById('rivenList').appendChild(createBuddy);
@@ -123,7 +126,7 @@ makeBuddies();
 
 function beautifulStranger() {
   // change the 'Strider' textnode to 'Aragorn'
-  // document.getElementById('aragorn').innerHTML='Aragorn';
+  // NOTE:document.getElementById('aragorn').innerHTML='Aragorn';
 }
 
 beautifulStranger();
@@ -133,12 +136,18 @@ function leaveTheShire() {
   // assemble the hobbits and move them to Rivendell
 }
 
+leaveTheShire();
 
 // Part 7
 
 
 function forgeTheFellowShip() {
   // create a new div called 'the-fellowship' within rivendell
+  //let rivendell = landsTag[1];
+  //let fellowship = document.createElement('div');
+  //fellowship.id = 'the-fellowship';
+  //rivendell.appendChild(fellowship);
+
   // add each hobbit and buddy one at a time to 'the-fellowship'
   // after each character is added make an alert that they have joined your party
 }
@@ -158,8 +167,10 @@ function theBalrog() {
 
 function hornOfGondor() {
   // pop up an alert that the horn of gondor has been blown
+  //NOTE:alert("The Horn of Gondor has been blown and Boromir has been killed!")
   // Boromir's been killed by the Uruk-hai!
   // put a linethrough on boromir's name
+  //NOTE:
   // Remove Boromir from the Fellowship
 }
 
