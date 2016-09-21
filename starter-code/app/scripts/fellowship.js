@@ -60,12 +60,12 @@ function makeHobbits() {
   //appending list of hobbits onto spire
   // hobbits.forEach(
 
-  )
+  // )
   // shire.innerHTML = ""
 
   // display an unordered list of hobbits in the shire (which is the second article tag on the page)
   // give each hobbit a class of hobbit
-
+ 
 }
 
 
