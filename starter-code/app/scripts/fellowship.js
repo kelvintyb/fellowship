@@ -20,14 +20,31 @@ var lands = ['The Shire', 'Rivendell', 'Mordor'];
 var body = document.querySelector('body');
 
 
+// For below, refer to 1st entry in bug list
+// function createEl(el){
+//   document.createElement(el);
+// }
+
 // Part 1
 
 
 function makeMiddleEarth() {
-  // create a section tag with an id of middle-earth
-  // add each land as an article tag
-  // inside each article tag include an h1 with the name of the land
+  // create a section tag
+  let middleEarth = document.createElement('section');
   // append middle-earth to your document body
+  body.appendChild(middleEarth);
+  //set id of middle-earth
+  middleEarth.setAttribute('id', 'middle-earth');
+
+
+  // add each land as an article tag
+  lands.forEach(function (land){
+    let makeLand = document.createElement('article');
+    middleEarth.appendChild(makeLand);
+  // inside each article tag include an h1 with the name of the land
+    makeLand.innerHTML='<h1>' + land + '</h1>';
+  })
+
 }
 
 makeMiddleEarth();
@@ -36,8 +53,19 @@ makeMiddleEarth();
 // Part 2
 
 function makeHobbits() {
+  //targetting var for 'The Shire'
+  let shireList = document.getElementsByTagName('article')[1].appendChild(document.createElement('ul'));
+
+
+  //appending list of hobbits onto spire
+  // hobbits.forEach(
+
+  )
+  // shire.innerHTML = ""
+
   // display an unordered list of hobbits in the shire (which is the second article tag on the page)
   // give each hobbit a class of hobbit
+
 }
 
 
