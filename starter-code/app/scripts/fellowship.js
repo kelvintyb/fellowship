@@ -18,7 +18,7 @@ var buddies = [
 
 var lands = ['The Shire', 'Rivendell', 'Mordor'];
 var body = document.querySelector('body');
-
+var landsTag = document.getElementsByTagName('article');
 
 // For below, refer to 1st entry in bug list
 // function createEl(el){
@@ -37,11 +37,11 @@ function makeMiddleEarth() {
   middleEarth.id = "middle-earth";
 
   // add each land as an article tag
-  lands.forEach(function (land){
+  lands.forEach(function(land) {
     let makeLand = document.createElement('article');
     middleEarth.appendChild(makeLand);
-  // inside each article tag include an h1 with the name of the land
-    makeLand.innerHTML='<h1>' + land + '</h1>';
+    // inside each article tag include an h1 with the name of the land
+    makeLand.innerHTML = '<h1>' + land + '</h1>';
   })
 
 }
@@ -53,22 +53,23 @@ makeMiddleEarth();
 
 function makeHobbits() {
   //targetting var for shire
-  let shire = document.getElementsByTagName('article')[0];
+  let shire = landsTag[0];
   //creating unordered list and appending to shire
   let list = document.createElement('ul');
   list.id = 'shireList';
   shire.appendChild(list);
 
   // display an unordered list of hobbits in the shire (which is the second article tag on the page)
+  //NOTE: Slight amendment to above set of instructions, it shld be 1st article tag on page
   // give each hobbit a class of hobbit
-    hobbits.forEach(function(hobbitName){
-      let createHobbit = document.createElement('li');
-      if(hobbitName == 'Frodo Baggins'){
-        createHobbit.id = 'frodo';
-      }
-      createHobbit.class = 'hobbit';
-      createHobbit.innerHTML=hobbitName;
-      document.getElementById('shireList').appendChild(createHobbit);
+  hobbits.forEach(function(hobbitName) {
+    let createHobbit = document.createElement('li');
+    if (hobbitName == 'Frodo Baggins') {
+      createHobbit.id = 'frodo';
+    }
+    createHobbit.class = 'hobbit';
+    createHobbit.innerHTML = hobbitName;
+    document.getElementById('shireList').appendChild(createHobbit);
   })
 }
 
@@ -81,12 +82,13 @@ function keepItSecretKeepItSafe() {
   let ring = document.createElement('div');
   ring.id = 'the-ring';
   // give the div a class of 'magic-imbued-jewelry'
-  ring.class = 'magic-imbued-jewelry';
+  ring.setAttribute("class", "magic-imbued-jewelry");
   // add the ring as a child of Frodo
   document.getElementById('frodo').appendChild(ring);
   //  add an event listener so that when a user clicks on the ring, the nazgulScreech function (provided) is invoked
   // NOTE:magic-imbued-jewelry css class may not have displayed correctly hence ring is unclickable. To test if the eventListener got added correctly, ring.innerHTML="testestest"
-  document.getElementById("the-ring").addEventListener("click", function(){
+  //NOTE: Regarding above bug, only happens on ring.class = 'magic-imbued-jewelry', using setAttribute method fixes it.
+  document.getElementById("the-ring").addEventListener("click", function() {
     nazgulScreech();
   });
 }
@@ -96,24 +98,35 @@ keepItSecretKeepItSafe();
 
 
 function makeBuddies() {
-  let rivSec = document.createElement('aside');
-
-
-
+  let rivendell = landsTag[1];
   // create an aside tag
+  let aside = document.createElement('aside')
+  // insert your aside/list elements as descendants of rivendell
+  let list = document.createElement('ul');
+  list.id = 'rivenList';
+  aside.appendChild(list);
+  rivendell.appendChild(aside);
   // attach an unordered list of the 'buddies' in the aside
-  // insert your aside as a child element of rivendell
+  buddies.forEach(function(buddy) {
+    let createBuddy = document.createElement('li');
+    if (buddy == 'Strider') {
+      buddy.id = 'aragorn';
+    }
+    createBuddy.innerHTML = buddy;
+    document.getElementById('rivenList').appendChild(createBuddy);
+  })
 }
 
-
+makeBuddies();
 // Part 5
 
 
 function beautifulStranger() {
   // change the 'Strider' textnode to 'Aragorn'
+  // document.getElementById('aragorn').innerHTML='Aragorn';
 }
 
-
+beautifulStranger();
 // Part 6
 
 function leaveTheShire() {
@@ -153,7 +166,7 @@ function hornOfGondor() {
 
 // Part 10
 
-function itsDangerousToGoAlone(){
+function itsDangerousToGoAlone() {
   // take Frodo and Sam out of the fellowship and move them to Mordor
   // add a div with an id of 'mount-doom' to Mordor
 }
