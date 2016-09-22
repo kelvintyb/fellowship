@@ -121,6 +121,7 @@ function makeBuddies() {
 }
 
 makeBuddies();
+
 // Part 5
 
 
@@ -134,6 +135,13 @@ beautifulStranger();
 
 function leaveTheShire() {
   // assemble the hobbits and move them to Rivendell
+
+  let rivendell = landsTag[1];
+  let shire = landsTag[0];
+  let cloned = document.getElementById('shireList').cloneNode(true);
+  rivendell.appendChild(cloned);
+  document.getElementsByTagName('ul')[0].innerHTML = '';
+  //NOTE: is there a more elegant way to do this? like directly shifting nodes to another parent node
 }
 
 leaveTheShire();
