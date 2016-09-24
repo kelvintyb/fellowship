@@ -62,12 +62,12 @@ function makeHobbits() {
   // display an unordered list of hobbits in the shire (which is the second article tag on the page)
   //NOTE: Slight amendment to above set of instructions, it shld be 1st article tag on page
   // give each hobbit a class of hobbit
+  //add Frodo and Sam id
   hobbits.forEach(function(hobbitName) {
     let createHobbit = document.createElement('li');
-    if (hobbitName == 'Frodo Baggins') {
-      createHobbit.id = 'frodo';
-    }
-    createHobbit.class = 'hobbit';
+    let firstName = hobbitName.split(' ')[0].toLowerCase();
+    createHobbit.id = firstName;
+    createHobbit.className = 'hobbit';
     createHobbit.innerHTML = hobbitName;
     document.getElementById('shireList').appendChild(createHobbit);
   })
@@ -82,12 +82,14 @@ function keepItSecretKeepItSafe() {
   let ring = document.createElement('div');
   ring.id = 'the-ring';
   // give the div a class of 'magic-imbued-jewelry'
-  ring.setAttribute("class", "magic-imbued-jewelry");
+
+  // ring.setAttribute("class", "magic-imbued-jewelry");
+  ring["className"] = 'magic-imbued-jewelry';
+  // ring.className = 'magic-imbued-jewelry';
+
   // add the ring as a child of Frodo
   document.getElementById('frodo').appendChild(ring);
   //  add an event listener so that when a user clicks on the ring, the nazgulScreech function (provided) is invoked
-  // NOTE:magic-imbued-jewelry css class may not have displayed correctly hence ring is unclickable. To test if the eventListener got added correctly, ring.innerHTML="testestest"
-  //NOTE: Regarding above bug, only happens on ring.class = 'magic-imbued-jewelry', using setAttribute method fixes it.
   document.getElementById("the-ring").addEventListener("click", function() {
     nazgulScreech();
   });
@@ -109,12 +111,14 @@ function makeBuddies() {
   // attach an unordered list of the 'buddies' in the aside
   buddies.forEach(function(buddy) {
     let createBuddy = document.createElement('li');
-    //attach id to buddies that are needed for later funcs
+    //attach id and class to buddies that are needed for later funcs
     if (buddy == 'Strider') {
-      buddy.id = 'aragorn';
-    } else if (buddy == 'Boromir'){
-      buddy.id = 'boromir'
+      createBuddy.id = 'aragorn';
+    } else {
+      let firstName = buddy.split(' ')[0].toLowerCase();
+      createBuddy.id = firstName;
     }
+    createBuddy.className = 'buddy';
     createBuddy.innerHTML = buddy;
     document.getElementById('rivenList').appendChild(createBuddy);
   })
@@ -127,8 +131,10 @@ makeBuddies();
 
 function beautifulStranger() {
   // change the 'Strider' textnode to 'Aragorn'
-  // NOTE:document.getElementById('aragorn').innerHTML='Aragorn';
+  buddies[3] = 'Aragorn II, son of Arathorn';
+  document.querySelector('#aragorn').textContent='Aragorn';
 }
+
 
 beautifulStranger();
 // Part 6
@@ -138,11 +144,15 @@ function leaveTheShire() {
 
   let rivendell = landsTag[1];
   let shire = landsTag[0];
-  let cloned = document.getElementById('shireList').cloneNode(true);
-  rivendell.appendChild(cloned);
-  document.getElementsByTagName('ul')[0].innerHTML = '';
-  //NOTE: is there a more elegant way to do this? like directly shifting nodes to another parent node
+  let hobbitList = shire.removeChild(document.querySelector('#shireList'));
+  rivendell.querySelector('aside').appendChild(hobbitList);
+
+  // let cloned = document.getElementById('shireList').cloneNode(true);
+  // rivendell.appendChild(cloned);
+  // document.getElementsByTagName('ul')[0].innerHTML = '';
 }
+
+
 
 leaveTheShire();
 
@@ -151,21 +161,41 @@ leaveTheShire();
 
 function forgeTheFellowShip() {
   // create a new div called 'the-fellowship' within rivendell
-  //let rivendell = landsTag[1];
-  //let fellowship = document.createElement('div');
-  //fellowship.id = 'the-fellowship';
-  //rivendell.appendChild(fellowship);
+  let rivendell = landsTag[1];
+  let fellowship = document.createElement('div');
+  fellowship.id = 'the-fellowship';
+  rivendell.appendChild(fellowship);
 
   // add each hobbit and buddy one at a time to 'the-fellowship'
   // after each character is added make an alert that they have joined your party
-}
 
+
+  fellowship = document.querySelector('#the-fellowship');
+  let shireList = document.querySelector('#shireList');
+  let rivenList = document.querySelector('#rivenList');
+
+
+  hobbits.forEach(function(currHobbit){
+    let hobbit = document.querySelector('.hobbit');
+    fellowship.appendChild(shireList.removeChild(hobbit));
+    // alert(currHobbit + ' has joined the Fellowship of the Ring!');
+  })
+  buddies.forEach(function(currBuddy){
+    let buddy = document.querySelector('.buddy');
+    fellowship.appendChild(rivenList.removeChild(buddy));
+    // alert(currBuddy + ' has joined the Fellowship of the Ring!');
+  })
+
+
+}
+forgeTheFellowShip();
 
 // Part 8
 
 
 function theBalrog() {
   // change the 'Gandalf' textNode to 'Gandalf the White'
+
   // apply style to the element
   // make the background 'white', add a grey border
 }
@@ -195,10 +225,20 @@ function itsDangerousToGoAlone() {
 
 function weWantsIt() {
   // Create a div with an id of 'gollum' and add it to Mordor
+  let gollum = document.createElement('id');
+  let mordor = landsTag[2];
+
+  gollum.id = 'gollum';
+  morder.appendChild(gollum);
+
   // Remove the ring from Frodo and give it to Gollum
+  let ring = document.querySelector('#the-ring');
+  let frodo = document.querySelector('#frodo')
+  gollum.appendChild(frodo.removeChild(ring));
+
+
   // Move Gollum into Mount Doom
 }
-
 
 // Part 12
 
