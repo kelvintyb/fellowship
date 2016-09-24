@@ -59,8 +59,7 @@ function makeHobbits() {
   list.id = 'shireList';
   shire.appendChild(list);
 
-  // display an unordered list of hobbits in the shire (which is the second article tag on the page)
-  //NOTE: Slight amendment to above set of instructions, it shld be 1st article tag on page
+  // display an unordered list of hobbits in the shire (which is the first article tag on the page)
   // give each hobbit a class of hobbit
   //add Frodo and Sam id
   hobbits.forEach(function(hobbitName) {
@@ -90,6 +89,8 @@ function keepItSecretKeepItSafe() {
   // add the ring as a child of Frodo
   document.getElementById('frodo').appendChild(ring);
   //  add an event listener so that when a user clicks on the ring, the nazgulScreech function (provided) is invoked
+  // BONUS Within the click listener for clicking `'#the-ring'`, add functionality so that when it's clicked, it not only calls `nazgulScreech` but also causes Frodo's opacity to go down to 0 for a while, only to fade back in.
+  // BONUS If the ring is clicked three times, the entire body element should disappear, to be replaced with the text "The Ring has been returned to Sauron and the world is over."
   document.getElementById("the-ring").addEventListener("click", function() {
     nazgulScreech();
   });
@@ -178,12 +179,12 @@ function forgeTheFellowShip() {
   hobbits.forEach(function(currHobbit){
     let hobbit = document.querySelector('.hobbit');
     fellowship.appendChild(shireList.removeChild(hobbit));
-    // alert(currHobbit + ' has joined the Fellowship of the Ring!');
+    alert(currHobbit + ' has joined the Fellowship of the Ring!');
   })
   buddies.forEach(function(currBuddy){
     let buddy = document.querySelector('.buddy');
     fellowship.appendChild(rivenList.removeChild(buddy));
-    // alert(currBuddy + ' has joined the Fellowship of the Ring!');
+    alert(currBuddy + ' has joined the Fellowship of the Ring!');
   })
 
 
@@ -195,55 +196,102 @@ forgeTheFellowShip();
 
 function theBalrog() {
   // change the 'Gandalf' textNode to 'Gandalf the White'
+  let gandalf = document.querySelector('#gandalf');
+  gandalf.textContent = 'Gandalf the White';
 
   // apply style to the element
   // make the background 'white', add a grey border
+  gandalf.style['background-color'] = 'white';
+  gandalf.style['border'] = 'solid 0.3em grey';
 }
 
-
+theBalrog();
 // Part 9
 
 function hornOfGondor() {
   // pop up an alert that the horn of gondor has been blown
-  //NOTE:alert("The Horn of Gondor has been blown and Boromir has been killed!")
+  alert("The Horn of Gondor has been blown!")
   // Boromir's been killed by the Uruk-hai!
   // put a linethrough on boromir's name
-  //NOTE:
+  let boromir = document.querySelector('#boromir');
+  boromir.style['text-decoration'] = 'line-through';
+
   // Remove Boromir from the Fellowship
+  let fellowship = document.querySelector('#the-fellowship');
+  //set timeout if you want to see the line-through on boromir
+
+  // setTimeout(function(){
+  //   fellowship.removeChild(boromir);
+  // }, 2000)
+
+  fellowship.removeChild(boromir);
 }
 
-
+hornOfGondor();
 // Part 10
 
 function itsDangerousToGoAlone() {
   // take Frodo and Sam out of the fellowship and move them to Mordor
+  let fellowship = document.querySelector('#the-fellowship');
+  let frodo = document.querySelector('#frodo');
+  let sam = document.querySelector('#samwise');
+  let mordor = landsTag[2];
+
+  let travellingFrodo = fellowship.removeChild(frodo);
+  let travellingSam = fellowship.removeChild(sam);
+  mordor.appendChild(travellingFrodo);
+  mordor.appendChild(travellingSam);
+
   // add a div with an id of 'mount-doom' to Mordor
+  let mountDoom = document.createElement('div');
+  mountDoom.id = 'mount-doom';
+  mordor.appendChild(mountDoom);
 }
 
+itsDangerousToGoAlone();
 
 // Part 11
 
 function weWantsIt() {
   // Create a div with an id of 'gollum' and add it to Mordor
-  let gollum = document.createElement('id');
+  let gollum = document.createElement('div');
   let mordor = landsTag[2];
-
   gollum.id = 'gollum';
-  morder.appendChild(gollum);
+  mordor.appendChild(gollum);
 
   // Remove the ring from Frodo and give it to Gollum
   let ring = document.querySelector('#the-ring');
   let frodo = document.querySelector('#frodo')
   gollum.appendChild(frodo.removeChild(ring));
 
-
   // Move Gollum into Mount Doom
+  let mountDoom = document.querySelector('#mount-doom');
+  gollum = document.querySelector('#gollum');
+  mountDoom.appendChild(mordor.removeChild(gollum));
 }
 
+weWantsIt();
 // Part 12
 
 function thereAndBackAgain() {
   // remove Gollum and the Ring from the document
+  let gollum = document.querySelector('#gollum');
+  document.querySelector('#mount-doom').removeChild(gollum);
   // remove all the baddies from the document
+  let mordor = landsTag[2];
+  // mordor.style['background'] = 'url("")';
+  mordor.style.setProperty('background','url("")');
   // Move all the hobbits back to the shire
+  let fellowship = document.querySelector('#the-fellowship')
+  let shire = landsTag[0];
+  let arrOfHobbits = document.querySelectorAll('.hobbit');
+  arrOfHobbits.forEach(function(currHobbit){
+    if (fellowship.querySelector('.hobbit')) {
+      shire.appendChild(fellowship.removeChild(currHobbit));
+    } else if (mordor.querySelector('.hobbit')) {
+      shire.appendChild(mordor.removeChild(currHobbit))
+    }
+  });
 }
+
+thereAndBackAgain()
