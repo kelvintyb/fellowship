@@ -104,7 +104,7 @@ function makeBuddies() {
   let rivendell = landsTag[1];
   // create an aside tag
   let aside = document.createElement('aside')
-  // insert your aside/list elements as descendants of rivendell
+    // insert your aside/list elements as descendants of rivendell
   let list = document.createElement('ul');
   list.id = 'rivenList';
   aside.appendChild(list);
@@ -133,7 +133,7 @@ makeBuddies();
 function beautifulStranger() {
   // change the 'Strider' textnode to 'Aragorn'
   buddies[3] = 'Aragorn II, son of Arathorn';
-  document.querySelector('#aragorn').textContent='Aragorn';
+  document.querySelector('#aragorn').textContent = 'Aragorn';
 }
 
 
@@ -176,12 +176,12 @@ function forgeTheFellowShip() {
   let rivenList = document.querySelector('#rivenList');
 
 
-  hobbits.forEach(function(currHobbit){
+  hobbits.forEach(function(currHobbit) {
     let hobbit = document.querySelector('.hobbit');
     fellowship.appendChild(shireList.removeChild(hobbit));
     alert(currHobbit + ' has joined the Fellowship of the Ring!');
   })
-  buddies.forEach(function(currBuddy){
+  buddies.forEach(function(currBuddy) {
     let buddy = document.querySelector('.buddy');
     fellowship.appendChild(rivenList.removeChild(buddy));
     alert(currBuddy + ' has joined the Fellowship of the Ring!');
@@ -201,8 +201,8 @@ function theBalrog() {
 
   // apply style to the element
   // make the background 'white', add a grey border
-  gandalf.style['background-color'] = 'white';
-  gandalf.style['border'] = 'solid 0.3em grey';
+  gandalf.style.backgroundColor = 'white';
+  gandalf.style.border = 'solid 0.3em grey';
 }
 
 theBalrog();
@@ -211,8 +211,8 @@ theBalrog();
 function hornOfGondor() {
   // pop up an alert that the horn of gondor has been blown
   alert("The Horn of Gondor has been blown!")
-  // Boromir's been killed by the Uruk-hai!
-  // put a linethrough on boromir's name
+    // Boromir's been killed by the Uruk-hai!
+    // put a linethrough on boromir's name
   let boromir = document.querySelector('#boromir');
   boromir.style['text-decoration'] = 'line-through';
 
@@ -220,14 +220,15 @@ function hornOfGondor() {
   let fellowship = document.querySelector('#the-fellowship');
   //set timeout if you want to see the line-through on boromir
 
-  // setTimeout(function(){
+  // setTimeout(function() {
   //   fellowship.removeChild(boromir);
-  // }, 2000)
+  // }, 5000)
 
   fellowship.removeChild(boromir);
 }
 
 hornOfGondor();
+
 // Part 10
 
 function itsDangerousToGoAlone() {
@@ -237,10 +238,10 @@ function itsDangerousToGoAlone() {
   let sam = document.querySelector('#samwise');
   let mordor = landsTag[2];
 
-  let travellingFrodo = fellowship.removeChild(frodo);
-  let travellingSam = fellowship.removeChild(sam);
-  mordor.appendChild(travellingFrodo);
-  mordor.appendChild(travellingSam);
+  // let travellingFrodo = fellowship.removeChild(frodo);
+  // let travellingSam = fellowship.removeChild(sam);
+  mordor.appendChild(frodo);
+  mordor.appendChild(sam);
 
   // add a div with an id of 'mount-doom' to Mordor
   let mountDoom = document.createElement('div');
@@ -261,13 +262,13 @@ function weWantsIt() {
 
   // Remove the ring from Frodo and give it to Gollum
   let ring = document.querySelector('#the-ring');
-  let frodo = document.querySelector('#frodo')
-  gollum.appendChild(frodo.removeChild(ring));
+  // let frodo = document.querySelector('#frodo')
+  gollum.appendChild(ring);
 
   // Move Gollum into Mount Doom
   let mountDoom = document.querySelector('#mount-doom');
   gollum = document.querySelector('#gollum');
-  mountDoom.appendChild(mordor.removeChild(gollum));
+  mountDoom.appendChild(gollum);
 }
 
 weWantsIt();
@@ -280,16 +281,17 @@ function thereAndBackAgain() {
   // remove all the baddies from the document
   let mordor = landsTag[2];
   // mordor.style['background'] = 'url("")';
-  mordor.style.setProperty('background','url("")');
+  mordor.style.setProperty('background', 'url("")');
   // Move all the hobbits back to the shire
   let fellowship = document.querySelector('#the-fellowship')
   let shire = landsTag[0];
   let arrOfHobbits = document.querySelectorAll('.hobbit');
-  arrOfHobbits.forEach(function(currHobbit){
+
+  arrOfHobbits.forEach(function(currHobbit) {
     if (fellowship.querySelector('.hobbit')) {
-      shire.appendChild(fellowship.removeChild(currHobbit));
+      shire.appendChild(currHobbit);
     } else if (mordor.querySelector('.hobbit')) {
-      shire.appendChild(mordor.removeChild(currHobbit))
+      shire.appendChild(currHobbit)
     }
   });
 }
